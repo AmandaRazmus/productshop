@@ -1,10 +1,9 @@
 import React from 'react'
 import {Link, useParams} from 'react-router-dom'
 import {Row, Col, Image, Card, Button, ListGroup} from 'react-bootstrap'
-import products from '../products'
 import Rating from '../components/Rating'
 
-const ProductScreen = () => {
+const ProductScreen = () => { //this is the new way to route the product info to this screen
   const params = useParams();
   const product = products.find(p => p._id === params.id)
   

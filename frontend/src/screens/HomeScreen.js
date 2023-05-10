@@ -1,10 +1,20 @@
-import React from 'react'
-import { Col, Row } from 'react-bootstrap'
-import Product from '../components/Product'
-import products from '../products'
+import React, {useEffect} from 'react';
+import { Col, Row } from 'react-bootstrap';
+import axios from 'axios'; //products.js now go through here
+import Product from '../components/Product';
+
+
 
 const HomeScreen = () => {
-  //this function 
+  useEffect(() => { //useEffect is a hook that does something before the UI goes to the client
+    const fetchProducts = () => {
+      const {data} = axios.get('/api/products')
+
+    }
+    
+  })
+
+
   return (
     <>
       <h1>Latest Products</h1>
