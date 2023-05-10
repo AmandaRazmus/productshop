@@ -1,23 +1,24 @@
-import React, {useEffect} from 'react';
-import { Col, Row } from 'react-bootstrap';
-import axios from 'axios'; //products.js now go through here
-import Product from '../components/Product';
-
+import React, {useEffect, useState} from 'react'
+import { Col, Row } from 'react-bootstrap'
+import axios from 'axios'
+import Product from '../components/Product'
 
 
 const HomeScreen = () => {
-  useEffect(() => { //useEffect is a hook that does something before the UI goes to the client
-    const fetchProducts = () => {
-      const {data} = axios.get('/api/products')
+  const [products, setProducts] = useState([])
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const {data} = await axios.get('/api/products')
+      setProducts(data)
     }
-    
-  })
+    fetchProducts()
+  } )
 
-
+  //this function 
   return (
     <>
-      <h1>Latest Products</h1>
+      <h1>Latest Products From Myshop</h1>
       <Row>
         {products.map((p) => (
           <Col sm={12} md={6} lg={4} xl={3}>
