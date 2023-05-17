@@ -19,4 +19,8 @@ const authUser = asyncHandler(async (req, res) => {
   }
 })
 
-export {authUser}
+const getUserProfile = asyncHandler(async (req, res) => {
+  res.json({message: 'success'})
+})
+
+export {authUser, getUserProfile} 

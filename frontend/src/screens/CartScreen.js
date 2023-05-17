@@ -11,7 +11,7 @@ const CartScreen = () => {
     const params = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const productID = params.id
+    const productId = params.id
 
     const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
@@ -19,7 +19,7 @@ const CartScreen = () => {
     const {cartItems} = cart
 
     useEffect(() => {
-        if(productID) {
+        if(productId) {
             dispatch(addToCart(productId, qty))
         }
     }, [dispatch, productId, qty])
@@ -29,7 +29,7 @@ const CartScreen = () => {
     }
 
     const checkoutHandler = () => {
-        navigate('/login?redirect=shipping')
+        navigate('/login?redirect=/shipping')
     }
 
   return (
