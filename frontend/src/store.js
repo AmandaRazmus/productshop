@@ -10,32 +10,9 @@ const rootReducer = combineReducers({
     userLogin: userLoginReducer
 })
 
-const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
-const paymentMethodFromStorage = localStorage.getItem('paymentMethod')
-  ? JSON.parse(localStorage.getItem('paymentMethod'))
-  : {}
-
-const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
-  ? JSON.parse(localStorage.getItem('shippingAddress'))
-  : {}
-
-
-const userInfoFromStorage = localStorage.getItem('userInfo')
-  ? JSON.parse(localStorage.getItem('userInfo'))
-  : null
-
-const initialState = {
-    cart: {
-    cartItems: cartItemsFromStorage,
-    shippingAddress: shippingAddressFromStorage,
-    paymentMethod: paymentMethodFromStorage
-  },
-  userLogin: { userInfo: userInfoFromStorage },
-}
-
 const store = configureStore({
     reducer: rootReducer, 
-    preloadedState: initialState,
+    preloadedState: {},
 })
 
 export default store
