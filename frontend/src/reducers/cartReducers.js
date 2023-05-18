@@ -22,11 +22,10 @@ export const cartReducer = (state = {cartItems: []}, action) => {
 
     case CART_REMOVE_ITEM:
       return {
-        ...state, 
+        ...state,
         cartItems: state.cartItems.filter(x => x.product !== action.payload)
       }
-
-      case CART_SAVE_SHIPPING_ADDRESS:
+    case CART_SAVE_SHIPPING_ADDRESS:
       return {
         ...state,
         shippingAddress: action.payload,
