@@ -7,7 +7,6 @@ import Rating from '../components/Rating'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
-
 const ProductScreen = () => {
   const [qty, setQty] = useState(1)
   const params = useParams();
@@ -20,11 +19,10 @@ const ProductScreen = () => {
   useEffect(() => {
     dispatch(listProductDetails(params.id))
   }, [dispatch, params])
-
+  
   const addToCartHandler = () => {
     navigate(`/cart/${params.id}?qty=${qty}`)
   }
-
   return (
     <>
       <Link className='btn btn-light my-3' to='/'>
