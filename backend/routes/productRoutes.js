@@ -1,4 +1,6 @@
-import express from 'express'
+import express from 'express'; 
+import asyncHandler from 'express-async-handler';
+import Product from '../models/productModel.js'; 
 import { getProductById, getProducts } from '../controllers/productController.js'
 
 const router = express.Router()
@@ -8,9 +10,6 @@ const router = express.Router()
 // @access  public
 router.get('/', getProducts)
 
-// @desc    Fetch single product by id
-// @route   GET /api/products/:id
-// @access  public
 router.get('/:id', getProductById)
 
 export default router

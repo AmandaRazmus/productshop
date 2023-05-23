@@ -23,13 +23,11 @@ const App = () => {
               <Route path="/" element={<HomeScreen />} exact />
               <Route path='/login' element={<LoginScreen />} />
               <Route path='/shipping' element={<ShippingScreen />} />
-              <Route path='/payment' element={<PaymentScreen />} />  
+              <Route path='/payment' element={<PaymentScreen />} />
               <Route path="/product/:id" element={<ProductScreen />} />
               <Route path="/cart/:id" element={<CartScreen />} />
               <Route path="/cart" element={<CartScreen />} />
-              <Route path='/register' element={<RegisterScreen />} />
-              <Route path='/profile' element={<ProfileScreen />} />
-              <Route path='/placeorder' element={<PlaceOrderScreen />} />
+
             </Routes>
           </Container>
         </main>
