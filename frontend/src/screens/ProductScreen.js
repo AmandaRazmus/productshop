@@ -8,8 +8,10 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 
 const ProductScreen = () => {
+  const [qty, setQty] = useState(1)
   const params = useParams();
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const productDetails = useSelector((state) => state.productDetails)
   const {loading, error, product} = productDetails
@@ -25,7 +27,7 @@ const ProductScreen = () => {
     <>
       <Link className='btn btn-light my-3' to='/'>
         Go Back
-      </Link>  
+      </Link>
       {loading ? (<Loader />)
         : error? (
           <Message variant='danger'>{error}</Message>
@@ -69,6 +71,31 @@ const ProductScreen = () => {
                   </Col>
                 </Row>
               </ListGroup.Item>
+              {product.countInStock > 0 && (
+
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Qty</Col>
+                    <Col>
+                      <Form.Control
+                        as='select'
+                        value={qty}
+                        onChange={e => setQty(e.target.value)}  
+                      >
+                          {
+                            [...Array(product.countInStock).keys()].map(x => (
+                              <option key={x+1} value={x+1}>
+                                {x+1}
+                              </option>
+                            ))
+                          }
+
+                      </Form.Control>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              )}
+
               <ListGroup.Item>
                 <Button
                   className='btn-block'
@@ -82,9 +109,9 @@ const ProductScreen = () => {
             </ListGroup>
           </Card>
         </Col>                     
-      </Row>) 
-    }
-
+      </Row>)
+      }  
+        
     </>
   )
 }
