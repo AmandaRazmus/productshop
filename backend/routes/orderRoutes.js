@@ -1,24 +1,22 @@
-import express from 'express'
-import { authUser, getUserProfile, updateUserProfile, registerUser } from '../controllers/userController.js'
-import { protect } from '../middleware/authMiddleware.js'
-
+import express from "express";
 const router = express.Router()
+import { protect } from '../middleware/authMiddleware.js' //makes private API call
+import { addOrderItems, getOrderById, updateOrderToPaid } from "../controllers/orderController.js";
 
-// @desc    Authenticate user and generate token
-// @route   POST /api/users/login
-// @access  public
-router.post('/login', authUser)
 
-// @desc    Register a new user
-// @route   POST /api/users
-// @access  Public
-router.route('/').post(registerUser)
+// @desc    Create a new order
+// @route   POST /api/orders
+// @access  private
+router.route('/').post(protect, addOrderItems) //we go to addorderitems after verifying user token which will take order info from screen and submit it
 
-// @desc    Get the user profile
-// @route   GET /api/users/profile
-// @access  Private
-router.route('/profile')
-  .get(protect, getUserProfile)
-  .put(protect, updateUserProfile)
+// @desc    lookup new order
+// @route   GET /api/orders/:id
+// @access  private
+router.route('/:id').get(protect, getOrderById) //in controller
+ 
+// @desc    update order to paid
+// @route   PUT /api/orders/:id 
+// @access  private
+router.route('/:id/pay').put(protect, updateOrderToPaid)
 
 export default router

@@ -21,7 +21,7 @@ const PlaceOrderScreen = () => {
   updatedCart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   )
-  updatedCart.shippingPrice = addDecimals(updatedCart.itemsPrice > 100 ? 0 : 100)
+  updatedCart.shippingPrice = addDecimals(updatedCart.itemsPrice > 100 ? 0 : 10)
   updatedCart.taxPrice = addDecimals(Number((0.15 * updatedCart.itemsPrice).toFixed(2)))
   updatedCart.totalPrice = (
     Number(updatedCart.itemsPrice) +
@@ -36,7 +36,7 @@ const PlaceOrderScreen = () => {
     if (success) {
       navigate(`/order/${order._id}`)
     }
-  }, [navigate, success])
+  }, [navigate, success, order])
 
   const placeOrderHandler = () => {
     dispatch(
