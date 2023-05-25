@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import {useNavigate } from 'react-router-dom'
+import {useNavigate, Link } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
+import { getHistoryOrder } from "../actions/orderActions";
 
 const ProfileScreen = () => {
   const [name, setName] = useState('')
@@ -25,7 +26,9 @@ const ProfileScreen = () => {
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
   const { success } = userUpdateProfile
 
+
   useEffect(() => {
+    //this is for getting order history of the logged-in user.
     if (!userInfo) {
       navigate('/login')
     } else {

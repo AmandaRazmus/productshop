@@ -14,7 +14,7 @@ import {
   USER_REGISTER_SUCCESS,
 } from '../constants/userConstants'
 
-export const userLoginReducer = (state = {}, action) => {
+export const userLoginReducer = (INITIAL_STATE, action) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
       return { loading: true }
@@ -34,6 +34,8 @@ export const userRegisterReducer = (state = {}, action) => {
       return { loading: true }
     case USER_REGISTER_SUCCESS:
       return { loading: false, userInfo: action.payload }
+     case "RESET":
+      return INITIAL_STATE; //Always return the initial state
     case USER_REGISTER_FAIL:
       return { loading: false, error: action.payload }
     default:
