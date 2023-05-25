@@ -29,6 +29,8 @@ const CartScreen = () => {
   const checkoutHandler = () => {
     navigate('/login?redirect=/shipping')
   }
+
+
   return (
     <Row>
       <Col md={8}>
@@ -97,7 +99,7 @@ const CartScreen = () => {
             <ListGroup.Item>
               <Button
                 type='button'
-                className='btn-block, mt-2'
+                className='btn-block mt-2'
                 disabled={cartItems.length === 0}
                 onClick={checkoutHandler}
               >

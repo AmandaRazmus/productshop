@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import User from '../models/userModel.js'
-import generateToken from '../utils/generateToken.js'
+import generateToken from '../utils/generateToken.js'; 
+
 
 const authUser = asyncHandler(async (req, res) => {
   const {email, password} = req.body
@@ -18,7 +19,6 @@ const authUser = asyncHandler(async (req, res) => {
     throw new Error('Invalid email or password')
   }
 })
-
 
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id)

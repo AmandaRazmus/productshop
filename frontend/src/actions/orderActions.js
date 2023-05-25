@@ -11,8 +11,6 @@ import {
   ORDER_PAY_REQUEST, 
 } from '../constants/orderConstants'
 
-
-//when you press place order button, it will perform this action
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -21,17 +19,15 @@ export const createOrder = (order) => async (dispatch, getState) => {
 
     const {
       userLogin: { userInfo },
-    } = getState() //read the token info from the state
-  
+    } = getState()
 
-  //previously did this in postman, now in code. This is POST call
-    const config = { 
+    const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`, 
+        Authorization: `Bearer ${userInfo.token}`,
       },
     }
-  
+
     const { data } = await axios.post(`/api/orders`, order, config)
 
     dispatch({
@@ -49,7 +45,6 @@ export const createOrder = (order) => async (dispatch, getState) => {
   }
 } 
 
-//this GETS the details of the order. Doesnt have body
 export const getOrderDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -83,7 +78,6 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
   }
 }
 
-//get orderID and result from paypal. Is a PUT so API routes with body of payment result
 export const payOrder = (orderId, paymentResult) => async (
   dispatch,
   getState

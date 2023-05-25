@@ -31,19 +31,28 @@ const OrderScreen = () => {
 
     //Calculating the price of all the orders, not including shipping, taxes fees.
     updatedOrder.itemsPrice = addDecimals(
-      order.orderItems.reduce((acc, item) => acc + item.fee * item.qty, 0)
+      order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     );
   }
 
   useEffect(() => {
-    //Getting PAYPAL_CLIENT_ID from the api.
+    //Getting PAYPAL_CLIENT_ID from the api. We are reading the data and looking for clientID
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get("/api/config/paypal");
       setClient_Id(clientId);
     };
     addPayPalScript();
 
-    //There is no order or the payment has been alrady paid.
+
+
+    //This compares if order._id and orderId are the same and if not, go get a new data based on orderId
+ if (order && order._id !== orderId) {
+  // dispatch({type: ORDER_DETAILS_RESET})
+  dispatch(getOrderDetails(orderId))
+   }
+
+
+    //There is no order or the payment has been already paid.
     //This is for when a user clicked "pay" again accidentally
     if (!order || successPay) {
       dispatch({ type: ORDER_PAY_RESET });
@@ -51,14 +60,16 @@ const OrderScreen = () => {
     }
   }, [dispatch, orderId, successPay, order]);
 
+
+
+
   return loading ? (
     <Loader />
   ) : error ? (
     <Message variant="danger">{error}</Message>
   ) : (
     <>
-      {/* <h1>Thank you for your order!</h1> */}
-      <h1>Order Number: {order._id}</h1>
+       <h1 className="mt-5 title">Order Number: {order._id}</h1>
 
       <Row>
         <Col md={8}>
@@ -119,10 +130,12 @@ const OrderScreen = () => {
                           />
                         </Col>
                         <Col>
-                          <Link to={`/event/${item.event}`}>{item.name}</Link>
+                          <Link to={`/product/${item.product}`}>
+                            {item.name}
+                            </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ${item.fee} = ${item.qty * item.fee}
+                          {item.qty} x ${item.price} = ${item.qty * item.price}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -159,44 +172,41 @@ const OrderScreen = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${order.totalFee}</Col>
+                  <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
               {!order.isPaid && (
                 <ListGroup.Item>
                   {loadingPay && <Loader />}
-                  <PayPalScriptProvider
-                    option={{
-                      "cliend-id": client_Id,
-                      components: "buttons",
-                      currency: "USD",
-                    }}
-                  >
-                    <PayPalButtons 
-                    style={{layout: "horizontal"}}
-                    createOrder={(data, actions) => {
-                        return actions.order.create({
+                  <PayPalScriptProvider options={{ "client-id": client_Id,
+                    components: "buttons",
+                    currency: "USD" }}>
+                        <PayPalButtons 
+                         style={{ layout: "horizontal" }}
+                         createOrder={(data, actions) => {
+                    return actions.order
+                        .create({
                             purchase_units: [
                                 {
                                     amount: {
-                                        currency_code: 'USD',
-                                        value: order.totalFee
-                                    }
-                                }
-                            ]
-                        }).then((orderId) => {
-                            console.log("orderId:", orderId)
+                                        currency_code: "USD",
+                                        value: order.totalPrice,
+                                    },
+                                },
+                            ],
+                        })
+                        .then((orderId) => {
                             return orderId;
-                        })
-                    }}
-                    onApprove={function (data,actions) {
-                        return actions.order.capture().then(function () {
-                            console.log("Paypal Data:", data)
-                            dispatch(payOrder(orderId, data))
-                        })
-                    }}
-                   />
-                  </PayPalScriptProvider>
+                        });
+                }}
+                onApprove={function (data, actions) {
+                    return actions.order.capture().then(function () {
+                      console.log(data)
+                        dispatch(payOrder(orderId, data))
+                    });
+                }}
+                        />
+                    </PayPalScriptProvider>
                 </ListGroup.Item>
               )}
             </ListGroup>
