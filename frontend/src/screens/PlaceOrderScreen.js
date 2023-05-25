@@ -18,10 +18,11 @@ const PlaceOrderScreen = () => {
     return (Math.round(num * 100) / 100).toFixed(2)
   }
 
+  //we have to use 'updated' because we do not want to change the redux store data
   updatedCart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   )
-  updatedCart.shippingPrice = addDecimals(updatedCart.itemsPrice > 100 ? 0 : 10)
+  updatedCart.shippingPrice = addDecimals(updatedCart.itemsPrice > 100 ? 0 : 100)
   updatedCart.taxPrice = addDecimals(Number((0.15 * updatedCart.itemsPrice).toFixed(2)))
   updatedCart.totalPrice = (
     Number(updatedCart.itemsPrice) +
@@ -36,7 +37,7 @@ const PlaceOrderScreen = () => {
     if (success) {
       navigate(`/order/${order._id}`)
     }
-  }, [navigate, success, order])
+  }, [navigate, success,order])
 
   const placeOrderHandler = () => {
     dispatch(
