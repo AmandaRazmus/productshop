@@ -41,13 +41,14 @@ export const orderDetailsReducer = (
   switch (action.type) {
     case ORDER_DETAILS_REQUEST:
       return {
-        ...state,
+
+        ...state, //copies data so there is a trail 
         loading: true,
       }
     case ORDER_DETAILS_SUCCESS:
       return {
         loading: false,
-        order: action.payload,
+        order: action.payload, //overwrites old data
       }
     case ORDER_DETAILS_FAIL:
       return {

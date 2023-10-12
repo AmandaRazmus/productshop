@@ -20,12 +20,13 @@ const HomeScreen = () => {
   //this function 
   return (
     <>
-      <h1>Latest Products From Myshop</h1>
+      <h1>Latest Products From Productshop</h1>
       {loading ? (<Loader />)
         : error? (
           <Message variant='danger'>{error}</Message>
         )
         : (<Row>
+
         {products.map((p) => (
           <Col key={p._id} sm={12} md={6} lg={4} xl={3}>
             <Product product={p} />
@@ -33,7 +34,7 @@ const HomeScreen = () => {
         ))}
       </Row>)
       }
-      
+
     </>
   )
 }
