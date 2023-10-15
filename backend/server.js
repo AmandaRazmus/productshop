@@ -6,6 +6,7 @@ import orderRoutes from './routes/orderRoutes.js'
 import connectDB from './config/db.js';
 import errorHandler from './middleware/errorMiddleware.js';
 
+const favicon = require('serve-favicon')
 const app = express();
 dotenv.config()
 connectDB()
@@ -18,9 +19,14 @@ app.get('/api/config/paypal', (req, res)=>
   res.send(process.env.PAYPAL_CLIENT_ID)
 )
 
-const favicon = require('serve-favicon')
+// Returns a middleware to serve favicon 
 app.use(favicon(__dirname + '/favicon.ico')); 
+
+// API endpoint to serve index  
 app.get('/', (_, res)=> res.sendFile(__dirname + '/index.html')) 
 
+
 app.use(errorHandler)
-app.listen(5000, console.log('server is running on port 5000'))
+ 
+// Start the server 
+app.listen(8080, console.log('server is running on port 5000'))
