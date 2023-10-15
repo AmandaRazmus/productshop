@@ -18,6 +18,9 @@ app.get('/api/config/paypal', (req, res)=>
   res.send(process.env.PAYPAL_CLIENT_ID)
 )
 
+const favicon = require('serve-favicon')
+app.use(favicon(__dirname + '/favicon.ico')); 
+app.get('/', (_, res)=> res.sendFile(__dirname + '/index.html')) 
 
 app.use(errorHandler)
 app.listen(5000, console.log('server is running on port 5000'))
