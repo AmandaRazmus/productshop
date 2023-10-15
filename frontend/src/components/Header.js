@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <header>
-      <link rel="icon" type="image/vnd.icon" href=" (C:\Users\info_000\.vscode\Projects\ProductShop\frontend\favicon.ico">
+      <link rel="icon" type="image/vnd.icon" href=" (C:\Users\info_000\.vscode\Projects\ProductShop\frontend\public\favicon.ico">
       </link>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
