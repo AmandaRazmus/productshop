@@ -61,4 +61,16 @@ const updateOrderToPaid = asyncHandler(async(req, res) => {
     }
 })
 
-export {addOrderItems, getOrderById, updateOrderToPaid}
+const getHistoryById = asyncHandler(async(req, res) => {
+
+  const history = await Order.findById({user: req.params.id})
+  if(history !==0) {
+      res.json(history)
+  } else {
+      res.status(404)
+      throw new Error ('History Order not found')
+  }
+
+})
+
+export {addOrderItems, getOrderById, updateOrderToPaid, getHistoryById}

@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "ProductShop",
+			"path": "."
+		}
+	],
+	"settings": {
+		"reactSnippets.settings.prettierEnabled": true
+	}
+}

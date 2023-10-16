@@ -1,6 +1,5 @@
 import axios from 'axios'
-import {
-  USER_LOGIN_FAIL,
+import {USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
@@ -12,24 +11,23 @@ import {
   USER_UPDATE_PROFILE_SUCCESS,  
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
-  USER_REGISTER_SUCCESS,
-} from '../constants/userConstants'
+  USER_REGISTER_SUCCESS,} from '../constants/userConstants'
 
 export const login = (email, password) => async (dispatch) => {
-  try {
+  try{
     dispatch({
-      type: USER_LOGIN_REQUEST,
+      type: USER_LOGIN_REQUEST
     })
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
     }
 
-    const { data } = await axios.post(
+    const {data} = await axios.post(
       '/api/users/login',
-      { email, password },
+      {email, password},
       config
     )
 
@@ -39,7 +37,7 @@ export const login = (email, password) => async (dispatch) => {
     })
 
     localStorage.setItem('userInfo', JSON.stringify(data))
-  } catch (error) {
+  }catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
       payload:
@@ -48,7 +46,7 @@ export const login = (email, password) => async (dispatch) => {
           : error.message,
     })
   }
-} 
+}
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')

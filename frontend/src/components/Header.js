@@ -10,6 +10,18 @@ const Header = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
+  const orderCreate = useSelector((state) => state.orderCreate)
+  const { order, success, error } = orderCreate
+
+  //adds item number to cart icon
+  const cart = useSelector((state) => state.cart)
+  const { cartItems } = cart
+  let totalCartItems;
+  if(cartItems) {
+  totalCartItems = cartItems.reduce((acc, item) => acc + item.qty, 0) 
+}
+
+
   const logoutHandler = () => {
     dispatch(logout())
   }
@@ -21,13 +33,17 @@ const Header = () => {
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>ProductShop</Navbar.Brand>
+            <Navbar.Brand>Logo</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <LinkContainer to="/cart">
-                 <Nav.Link><i className='fas fa-cart-plus'></i> Cart</Nav.Link>
+                <Nav.Link>
+                  <i className="fa-solid fa-cart-shopping"></i>
+                  {totalCartItems === 0 ? null 
+                : ( <span className='badge badge-warning' id='lblCartCount'>{totalCartItems}</span>)}
+                  </Nav.Link>
               </LinkContainer>
               {userInfo? (
                  <NavDropdown title={userInfo.name} id='username'>
@@ -39,7 +55,7 @@ const Header = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               ): (<LinkContainer to="/login">
-                <Nav.Link><i className='fas fa-user'></i> Sign In</Nav.Link>
+                <Nav.Link><i className='fas fa-user'></i></Nav.Link>
               </LinkContainer>)}
      
             </Nav>

@@ -4,7 +4,7 @@ import { cartReducer } from './reducers/cartReducers'
 import { userLoginReducer,
   userDetailsReducer,
   userUpdateProfileReducer,userRegisterReducer  } from './reducers/userReducers'
-  import { orderCreateReducer,
+  import { orderCreateReducer, orderHistoryReducer,
   orderDetailsReducer, orderPayReducer, } from './reducers/orderReducers'
 
 const rootReducer = combineReducers({
@@ -18,21 +18,31 @@ const rootReducer = combineReducers({
   orderCreate: orderCreateReducer, 
   orderDetails: orderDetailsReducer, 
   orderPay: orderPayReducer,
-})
+  orderHistory: orderHistoryReducer //receives order history for profile page
+});
 
-const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
-const paymentMethodFromStorage = localStorage.getItem('paymentMethod')
-  ? JSON.parse(localStorage.getItem('paymentMethod'))
-  : {}
+const cartItemsFromStorage = localStorage.getItem('cartItems') 
+  ? JSON.parse(localStorage.getItem('cartItems')) 
+  : [];
+
 
 const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
   ? JSON.parse(localStorage.getItem('shippingAddress'))
-  : {}
+  : {};
 
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
-  : null
+  : null;
+
+  const paymentMethodFromStorage = localStorage.getItem("paymentMethod")
+  ? JSON.parse(localStorage.getItem("paymentMethod"))
+  : {};
+
+  //For the profile page
+// const orderHistoryFromStorage = localStorage.getItem("orderHistoryItems")
+//   ? JSON.parse(localStorage.getItem("orderHistoryItems"))
+//   : {};
 
 const initialState = {
   cart: {
@@ -40,12 +50,12 @@ const initialState = {
     shippingAddress: shippingAddressFromStorage,
     paymentMethod: paymentMethodFromStorage
   },
-  userLogin: { userInfo: userInfoFromStorage },
-}
+  //userLogin: { userInfo: userInfoFromStorage }, //look at later
+};
 
 const store = configureStore({
   reducer: rootReducer,
   preloadedState: initialState,
-})
+});
 
-export default store
+export default store;

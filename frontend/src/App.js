@@ -7,12 +7,12 @@ import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from './screens/LoginScreen';
-import ShippingScreen from "./screens/ShippingScreen";
-import PaymentScreen from './screens/PaymentScreen';
-import ProfileScreen from './screens/profileScreen';
-import RegisterScreen from './screens/RegisterScreen';
+import ShippingScreen from './screens/ShippingScreen'
+import PaymentScreen from './screens/PaymentScreen'
+import ProfileScreen from './screens/profileScreen'
+import RegisterScreen from './screens/RegisterScreen'
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
-import OrderScreen from "./screens/orderScreen";
+import OrderScreen from './screens/orderScreen';
 
 const App = () => {
   return (
@@ -32,8 +32,7 @@ const App = () => {
               <Route path='/register' element={<RegisterScreen />} />
               <Route path='/profile' element={<ProfileScreen />} />
               <Route path='/placeorder' element={<PlaceOrderScreen />} />
-              <Route path='/order/:id' element={<OrderScreen />}/>
-
+              <Route path='/order/:id' element={<OrderScreen />} />  
             </Routes>
           </Container>
         </main>

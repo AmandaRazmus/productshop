@@ -1,28 +1,30 @@
-import React, {useEffect, useState} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import {Link, useParams, useNavigate} from 'react-router-dom'
-import {Row, Col, Image, Card, Button, ListGroup, Form} from 'react-bootstrap'
-import { listProductDetails } from '../actions/productActions'
-import Rating from '../components/Rating'
-import Loader from '../components/Loader'
-import Message from '../components/Message'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Row, Col, Image, Card, Button, ListGroup, Form } from 'react-bootstrap';
+import { listProductDetails } from '../actions/productActions';
+import Rating from '../components/Rating';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 const ProductScreen = () => {
-  const [qty, setQty] = useState(1)
+  const [qty, setQty] = useState(1);
   const params = useParams();
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const productDetails = useSelector((state) => state.productDetails)
-  const {loading, error, product} = productDetails
+  const productDetails = useSelector((state) => state.productDetails);
+  const {loading, error, product} = productDetails;
 
   useEffect(() => {
-    dispatch(listProductDetails(params.id))
-  }, [dispatch, params])
+    dispatch(listProductDetails(params.id));
+     }, [dispatch, params]);
   
   const addToCartHandler = () => {
-    navigate(`/cart/${params.id}?qty=${qty}`)
-  }
+    navigate(`/cart/${params.id}?qty=${qty}`);
+  };
+
+
   return (
     <>
       <Link className='btn btn-light my-3' to='/'>
@@ -75,7 +77,7 @@ const ProductScreen = () => {
 
                 <ListGroup.Item>
                   <Row>
-                    <Col>Qty</Col>
+                    <Col>Qty:</Col>
                     <Col>
                       <Form.Control
                         as='select'

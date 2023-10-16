@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ import { ORDER_PAY_RESET } from "../constants/orderConstants";
 const OrderScreen = () => {
   const params = useParams();
   const orderId = params.id;
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -43,13 +44,16 @@ const OrderScreen = () => {
     };
     addPayPalScript();
 
-    //There is no order or the payment has been alrady paid.
+    //There is no order or the payment has been already paid.
     //This is for when a user clicked "pay" again accidentally
     if (!order || successPay) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch(getOrderDetails(orderId));
     }
   }, [dispatch, orderId, successPay, order]);
+
+
+
 
   return loading ? (
     <Loader />
@@ -131,6 +135,9 @@ const OrderScreen = () => {
               )}
             </ListGroup.Item>
           </ListGroup>
+          <Button  className='mt-4 p-2'  type='button' onClick={() => navigate(-1)}> 
+           Go Back
+    </Button> 
         </Col>
         <Col md={4}>
           <Card>
@@ -165,17 +172,14 @@ const OrderScreen = () => {
               {!order.isPaid && (
                 <ListGroup.Item>
                   {loadingPay && <Loader />}
-                  <PayPalScriptProvider
-                    option={{
-                      "cliend-id": client_Id,
-                      components: "buttons",
-                      currency: "USD",
-                    }}
-                  >
-                    <PayPalButtons 
-                    style={{layout: "horizontal"}}
-                    createOrder={(data, actions) => {
-                        return actions.order.create({
+                  <PayPalScriptProvider options={{ "client-id": client_Id,
+                    components: "buttons",
+                    currency: "USD" }}>
+                        <PayPalButtons 
+                         style={{ layout: "horizontal" }}
+                         createOrder={(data, actions) => {
+                    return actions.order
+                        .create({
                             purchase_units: [
                                 {
                                     amount: {
@@ -187,16 +191,16 @@ const OrderScreen = () => {
                         }).then((orderId) => {
                             console.log("orderId:", orderId)
                             return orderId;
-                        })
-                    }}
-                    onApprove={function (data,actions) {
-                        return actions.order.capture().then(function () {
-                            console.log("Paypal Data:", data)
-                            dispatch(payOrder(orderId, data))
-                        })
-                    }}
-                   />
-                  </PayPalScriptProvider>
+                        });
+                }}
+                onApprove={function (data, actions) {
+                    return actions.order.capture().then(function () {
+
+                        dispatch(payOrder(orderId, data))
+                    });
+                }}
+                        />
+                    </PayPalScriptProvider>
                 </ListGroup.Item>
               )}
             </ListGroup>

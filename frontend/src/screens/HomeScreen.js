@@ -20,7 +20,7 @@ const HomeScreen = () => {
   //this function 
   return (
     <>
-      <h1>Latest Products From Productshop</h1>
+      <h1 className="title mt-5">PRODUCTS</h1>
       {loading ? (<Loader />)
         : error? (
           <Message variant='danger'>{error}</Message>

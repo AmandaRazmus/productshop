@@ -32,12 +32,12 @@ const LoginScreen = () => {
   }
   return (
     <FormContainer>
-      <h1>Sign In</h1>
+       <h1 className='mt-5' title >Sign In</h1>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='email'>
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label>Email Address:</Form.Label>
           <Form.Control
             type='email'
             placeholder='Enter email'
@@ -47,7 +47,7 @@ const LoginScreen = () => {
         </Form.Group>
 
         <Form.Group controlId='password'>
-          <Form.Label>Password</Form.Label>
+          <Form.Label>Password:</Form.Label>
           <Form.Control
             type='password'
             placeholder='Enter password'
@@ -56,7 +56,7 @@ const LoginScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary'>
+        <Button type='submit' variant='primary' className='mt-3'>
           Sign In
         </Button>
       </Form>

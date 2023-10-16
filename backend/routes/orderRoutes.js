@@ -1,8 +1,7 @@
 import express from "express";
 const router = express.Router()
-import { protect } from '../middleware/authMiddleware.js' //makes private API call
-import { addOrderItems, getOrderById, updateOrderToPaid } from "../controllers/orderController.js";
-
+import { protect } from '../middleware/authMiddleware.js'
+import { addOrderItems, getOrderById, updateOrderToPaid, getHistoryById } from '../controllers/orderController.js'
 
 // @desc    Create a new order
 // @route   POST /api/orders
@@ -18,5 +17,7 @@ router.route('/:id').get(protect, getOrderById) //in controller
 // @route   PUT /api/orders/:id 
 // @access  private
 router.route('/:id/pay').put(protect, updateOrderToPaid)
+
+router.route('/history/:id').get(protect, getHistoryById)
 
 export default router

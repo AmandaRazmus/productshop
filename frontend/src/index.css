@@ -33,3 +33,60 @@ h2 {
 h3{
   padding: 1rem 0;
 }
+
+.badge {
+  padding-left: 10px;
+  padding-right: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+#lblCartCount {
+    font-size: 12px;
+    background: rgb(52, 163, 200);
+    color: #fff;
+    padding: 0 4px;
+    vertical-align: top;
+    margin-left: -5px; 
+    margin-top: -5px
+}
+
+.profileText {
+  color: rgb(145, 75, 52);
+}
+
+.title {
+  font-weight: bold;
+  color: rgb(74, 74, 85);
+}
+
+.profileOrderId:hover {
+  color: #e95420
+}
+
+
+.thankyou {
+  font-size: 4rem;
+}
+
+.thankbox {
+  background-color: #d9bc94;
+  border-radius: 20px;
+  width: 100%;
+  height: 40%;
+}
+
+.thankbox > h1 {
+  color: #e95420;
+  ;
+}
+
+.thankbox > p {
+  font-size: 2rem;
+  color: #444140;
+}
