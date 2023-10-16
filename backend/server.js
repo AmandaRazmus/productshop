@@ -7,7 +7,7 @@ import orderRoutes from './routes/orderRoutes.js';
 import connectDB from './config/db.js';
 import errorHandler from './middleware/errorMiddleware.js';
 
-const favicon = require('serve-favicon')
+const favicon = import('serve-favicon')
 const app = express();
 dotenv.config()
 connectDB()
@@ -33,4 +33,4 @@ if (process.env.NODE_ENV === 'production'){
 app.use(errorHandler)
  
 const PORT = process.env.PORT
-app.listen(PORT, console.log(`Server is running on port ${PORT}`))
+app.listen(8080, console.log(`Server is running on port ${PORT}`))
