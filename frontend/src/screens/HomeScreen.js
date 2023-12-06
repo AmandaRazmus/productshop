@@ -1,23 +1,22 @@
-import React, {useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Col, Row } from 'react-bootstrap'
-import { listProducts } from '../actions/productActions'
-import Product from '../components/Product'
-import Loader from '../components/Loader'
-import Message from '../components/Message'
+import React, {useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Col, Row } from 'react-bootstrap';
+import { listProducts } from '../actions/productActions';
+import Product from '../components/Product';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 
 const HomeScreen = () => {
 
-  const dispatch = useDispatch()
-  const productList = useSelector((state) => state.productList)
-  const {loading, error, products} = productList
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.productList);
+  const {loading, error, products} = productList;
 
   useEffect(() => {
     dispatch(listProducts())
-  }, [dispatch] )
+  }, [dispatch] );
 
-  //this function 
   return (
     <>
       <h1 className="title mt-5">PRODUCTS</h1>
@@ -34,9 +33,8 @@ const HomeScreen = () => {
         ))}
       </Row>)
       }
-
     </>
   )
 }
 
-export default HomeScreen
+export default HomeScreen;

@@ -1,43 +1,45 @@
-import React, { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import Message from '../components/Message'
-import CheckoutSteps from '../components/CheckoutSteps'
-import { createOrder } from '../actions/orderActions'
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import Message from '../components/Message';
+import CheckoutSteps from '../components/CheckoutSteps';
+import { createOrder } from '../actions/orderActions';
 
 const PlaceOrderScreen = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const cart = useSelector((state) => state.cart)
-  const updatedCart = {}
+  const cart = useSelector((state) => state.cart);
+  const updatedCart = {};
 
-   //   Calculate prices
+  //   Calculate prices
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
   }
-
+//   Calculating the price of all the orders, not including shipping, taxes fees.
   updatedCart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   )
-  updatedCart.shippingPrice = addDecimals(updatedCart.itemsPrice > 100 ? 0 : 10)
-  updatedCart.taxPrice = addDecimals(Number((0.15 * updatedCart.itemsPrice).toFixed(2)))
+  updatedCart.shippingPrice = addDecimals(updatedCart.itemsPrice > 100 ? 0 : 10);
+  updatedCart.taxPrice = addDecimals(Number((0.15 * updatedCart.itemsPrice).toFixed(2)));
   updatedCart.totalPrice = (
     Number(updatedCart.itemsPrice) +
     Number(updatedCart.shippingPrice) +
     Number(updatedCart.taxPrice)
-  ).toFixed(2)
+  ).toFixed(2);
 
-  const orderCreate = useSelector((state) => state.orderCreate)
-  const { order, success, error } = orderCreate
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success, error } = orderCreate;
 
+  //   If the order is created, redirect to the order screen
   useEffect(() => {
     if (success) {
       navigate(`/order/${order._id}`)
     }
-  }, [navigate, success, order])
+  }, [navigate, success, order]);
 
+//   If the user has not entered the shipping address, redirect to the shipping screen
   const placeOrderHandler = () => {
     dispatch(
       createOrder({
@@ -49,7 +51,7 @@ const PlaceOrderScreen = () => {
         taxPrice: updatedCart.taxPrice,
         totalPrice: updatedCart.totalPrice,
       })
-    )
+    );
   }
 
     return (
@@ -158,4 +160,4 @@ const PlaceOrderScreen = () => {
   )
 }
 
-export default PlaceOrderScreen
+export default PlaceOrderScreen;

@@ -1,6 +1,6 @@
 {
-  "name": "productshop",
-  "version": "1.0.0",
+  "name": "ProductShop",
+  "version": "20.0.0",
   "description": "MERN shopping cart app",
   "main": "server.js",
   "type": "module",
@@ -34,8 +34,5 @@
     "mongoose": "^7.1.1",
     "nodemon": "^3.0.1",
     "webpack": "^5.89.0"
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

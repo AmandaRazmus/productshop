@@ -15,22 +15,20 @@ import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { getHistoryOrder } from "../actions/orderActions";
 import { identity } from "lodash";
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs';
 
 //this is for encrypting password
 // example =>  $2a$10$CwTycUXWue0Thq9StjUM0u => to be added always to the password hash
-const salt = bcrypt.genSaltSync(10)
+const salt = bcrypt.genSaltSync(10);
 
 const ProfileScreen = () => {
-  const passwordInputRef = useRef()
+  const passwordInputRef = useRef();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   //const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
-
-
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -51,14 +49,12 @@ const ProfileScreen = () => {
   const { isLoading, historyOrder, isError } = orderHistory;
   console.log("orderHistory:", orderHistory);
 
-
-
+//this is for getting order history of the logged-in user.
   useEffect(() => {
-    //this is for getting order history of the logged-in user.
     dispatch(getHistoryOrder(userInfo._id));
 
     if (!userInfo) {
-      navigate("/login");
+      navigate("/login"); //if the user is not logged in, redirect to login page
     } else {
       if (!user.name) {
         dispatch(getUserDetails("profile"));
@@ -69,11 +65,12 @@ const ProfileScreen = () => {
     }
   }, [dispatch, userInfo, user, navigate]);
 
+//this is for updating user profile
   const submitHandler = (e) => {
     const password = passwordInputRef.current.value
     const hashedPassword = bcrypt.hashSync(password, salt)
     console.log(hashedPassword)
-
+    
     e.preventDefault();
     if (password !== confirmPassword) {
       setMessage("Passwords do not match");

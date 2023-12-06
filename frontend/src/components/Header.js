@@ -1,29 +1,29 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
-import { logout } from '../actions/userActions'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import { logout } from '../actions/userActions';
 
-const Header = () => {
+const Header = () => { 
   const dispatch = useDispatch()
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin); //gets the userLogin state from the store
+  const { userInfo } = userLogin; //gets the userInfo from the userLogin reducer
 
-  const orderCreate = useSelector((state) => state.orderCreate)
-  const { order, success, error } = orderCreate
+  const orderCreate = useSelector((state) => state.orderCreate); //gets the orderCreate state from the store
+  const { order, success, error } = orderCreate; //gets the order, success and error from the orderCreate reducer
 
   //adds item number to cart icon
-  const cart = useSelector((state) => state.cart)
-  const { cartItems } = cart
-  let totalCartItems;
+  const cart = useSelector((state) => state.cart); //gets the cart state from the store
+  const { cartItems } = cart; //gets the cart items from the cart reducer
+  let totalCartItems;  //total number of items in the cart
   if(cartItems) {
-  totalCartItems = cartItems.reduce((acc, item) => acc + item.qty, 0) 
+  totalCartItems = cartItems.reduce((acc, item) => acc + item.qty, 0); //adds the qty of each item in the cart 
 }
 
 
   const logoutHandler = () => {
-    dispatch(logout())
+    dispatch(logout()); 
   }
 
   return (
@@ -66,4 +66,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Header;

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs';
 
 const userSchema = mongoose.Schema({
   name: {
@@ -22,20 +22,21 @@ const userSchema = mongoose.Schema({
   }
 }, {
   timestamps: true
-})
+});
 
 userSchema.methods.matchPassword = async function(enteredPassword) {
-  return await bcrypt.compare(enteredPassword, this.password)
+  return await bcrypt.compare(enteredPassword, this.password); //compare the entered password with the password in the database
 }
 
 userSchema.pre('save', async function (next){
   if (!this.isModified('password')) {
-    next()
+    next();   //if the password is not modified then we want to call next
   }
 
-  const salt = await bcrypt.genSalt(10)
-  this.password = await bcrypt.hash(this.password, salt)
-})
+  const salt = await bcrypt.genSalt(10);    //generate a salt
+  this.password = await bcrypt.hash(this.password, salt); //hash the password
+});
 
-const User = mongoose.model('users', userSchema)
-export default User
+const User = mongoose.model('users', userSchema); //create a model from the schema
+
+export default User;

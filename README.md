@@ -114,7 +114,4 @@ P. Heroku deployment<br />
 	1. Connect with password<br />
  	2. Build & deploy<br />
 
-
-
-
 </ol>

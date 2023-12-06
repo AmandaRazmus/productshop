@@ -1,28 +1,28 @@
-import React, { useState } from 'react'
-import { Form, Button, Col } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import FormContainer from '../components/FormContainer'
-import CheckoutSteps from '../components/CheckoutSteps'
-import { savePaymentMethod } from '../actions/cartActions'
+import React, { useState } from 'react';
+import { Form, Button, Col } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import FormContainer from '../components/FormContainer';
+import CheckoutSteps from '../components/CheckoutSteps';
+import { savePaymentMethod } from '../actions/cartActions';
 
 const PaymentScreen = () => {
-  const navigate = useNavigate()
-  const cart = useSelector((state) => state.cart)
-  const { shippingAddress } = cart
+  const navigate = useNavigate();
+  const cart = useSelector((state) => state.cart);
+  const { shippingAddress } = cart;
 
   if (!shippingAddress) {
-    navigate('/shipping')
+    navigate('/shipping');
   }
 
-  const [paymentMethod, setPaymentMethod] = useState('PayPal')
+  const [paymentMethod, setPaymentMethod] = useState('PayPal');
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(savePaymentMethod(paymentMethod))
-    navigate('/placeorder')
+    dispatch(savePaymentMethod(paymentMethod));
+    navigate('/placeorder');
   }
 
   return (
@@ -61,4 +61,4 @@ const PaymentScreen = () => {
   )
 }
 
-export default PaymentScreen
+export default PaymentScreen;

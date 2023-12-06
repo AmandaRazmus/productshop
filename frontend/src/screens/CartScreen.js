@@ -1,34 +1,35 @@
-import React, { useEffect } from 'react'
-import { Link, useNavigate, useParams, useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
-import Message from '../components/Message'
-import { addToCart, removeFromCart } from '../actions/cartActions'
+import React, { useEffect } from 'react';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap';
+import Message from '../components/Message';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const CartScreen = () => {
-  const location = useLocation()
+  const location = useLocation();
   const params = useParams();
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const productId = params.id
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const productId = params.id;
 
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1
+  const qty = location.search ? Number(location.search.split('=')[1]) : 1;
 
-  const cart = useSelector((state) => state.cart)
-  const {cartItems} = cart
+  const cart = useSelector((state) => state.cart);
+  const {cartItems} = cart;
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty))
+      dispatch(addToCart(productId, qty));
     }
-  }, [dispatch, productId, qty])
+  }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id))
+    dispatch(removeFromCart(id));
   }
   const checkoutHandler = () => {
-    navigate('/login?redirect=/shipping')
+    navigate('/login?redirect=/shipping');
   }
+
   return (
     <Row>
       <Col md={8}>
@@ -111,4 +112,4 @@ const CartScreen = () => {
   )
 }
 
-export default CartScreen
+export default CartScreen;

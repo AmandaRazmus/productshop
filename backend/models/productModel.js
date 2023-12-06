@@ -6,7 +6,7 @@ const reviewSchema = mongoose.Schema({
   comment: {type: String, required: true}
 }, {
   timestamps: true
-})
+});
 const productSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectID,
@@ -56,7 +56,8 @@ const productSchema = mongoose.Schema({
   reviews: [reviewSchema]
 }, {
   timestamps: true
-})
+});
 
-const Product = mongoose.model('products', productSchema)
-export default Product
+const Product = mongoose.model('products', productSchema);//create a model from the schema
+
+export default Product;

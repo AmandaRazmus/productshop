@@ -53,8 +53,6 @@ const OrderScreen = () => {
   }, [dispatch, orderId, successPay, order]);
 
 
-
-
   return loading ? (
     <Loader />
   ) : error ? (

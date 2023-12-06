@@ -10,41 +10,41 @@ import bcrypt from 'bcryptjs';
 
 //this is for encrypting password
 // example =>  $2a$10$CwTycUXWue0Thq9StjUM0u => to be added always to the password hash
-const salt = bcrypt.genSaltSync(10)
+const salt = bcrypt.genSaltSync(10);
 
 const RegisterScreen = () => {
-  const nameInputRef = useRef()
-  const emailInputRef = useRef()
-  const passwordInputRef = useRef()
-  const confirmInputRef = useRef()
-  const [message, setMessage] = useState(null)
-  const location = useLocation()
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const nameInputRef = useRef();
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
+  const confirmInputRef = useRef();
+  const [message, setMessage] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const userRegister = useSelector((state) => state.userRegister)
-  const { loading, error, userInfo } = userRegister
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
 
-  const redirect = location.search ? location.search.split('=')[1] : '/'
+  const redirect = location.search ? location.search.split('=')[1] : '/';
 
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect)
+      navigate(redirect);
     }
-  }, [navigate, userInfo, redirect])
+  }, [navigate, userInfo, redirect]);
 
   const submitHandler = (e) => {
-    const name = nameInputRef.current.value
-    const email = emailInputRef.current.value
-    const password = passwordInputRef.current.value
-    const confirmPassword = confirmInputRef.current.value
-    const hashedPassword = bcrypt.hashSync(password, salt)
+    const name = nameInputRef.current.value;
+    const email = emailInputRef.current.value;
+    const password = passwordInputRef.current.value;
+    const confirmPassword = confirmInputRef.current.value;
+    const hashedPassword = bcrypt.hashSync(password, salt);
 
-    e.preventDefault()
+    e.preventDefault();
     if (password !== confirmPassword) {
-      setMessage('Passwords do not match')
+      setMessage('Passwords do not match');
     } else {
-      dispatch(register(name, email, hashedPassword))
+      dispatch(register(name, email, hashedPassword));
     }
   }
 
@@ -109,4 +109,4 @@ const RegisterScreen = () => {
   )
 }
 
-export default RegisterScreen
+export default RegisterScreen;

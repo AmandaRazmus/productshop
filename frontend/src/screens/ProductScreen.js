@@ -1,27 +1,27 @@
-import React, {useEffect, useState} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import {Link, useParams, useNavigate} from 'react-router-dom'
-import {Row, Col, Image, Card, Button, ListGroup, Form} from 'react-bootstrap'
-import { listProductDetails } from '../actions/productActions'
-import Rating from '../components/Rating'
-import Loader from '../components/Loader'
-import Message from '../components/Message'
+import React, {useEffect, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {Link, useParams, useNavigate} from 'react-router-dom';
+import {Row, Col, Image, Card, Button, ListGroup, Form} from 'react-bootstrap';
+import { listProductDetails } from '../actions/productActions';
+import Rating from '../components/Rating';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 const ProductScreen = () => {
-  const [qty, setQty] = useState(1)
+  const [qty, setQty] = useState(1);
   const params = useParams();
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const productDetails = useSelector((state) => state.productDetails)
-  const {loading, error, product} = productDetails
+  const productDetails = useSelector((state) => state.productDetails); // productDetails is from store.js
+  const {loading, error, product} = productDetails; 
 
   useEffect(() => {
-    dispatch(listProductDetails(params.id))
-  }, [dispatch, params])
+    dispatch(listProductDetails(params.id)); // params.id is from App.js
+  }, [dispatch, params]); 
   
-  const addToCartHandler = () => {
-    navigate(`/cart/${params.id}?qty=${qty}`)
+  const addToCartHandler = () => { 
+    navigate(`/cart/${params.id}?qty=${qty}`); 
   }
   return (
     <>
@@ -116,4 +116,4 @@ const ProductScreen = () => {
   )
 }
 
-export default ProductScreen
+export default ProductScreen;
