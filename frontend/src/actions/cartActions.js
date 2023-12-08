@@ -21,13 +21,14 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
 }
 
 //when you press remove from cart button, it will perform this action
-export const removeFromCart = (id) => (dispatch, getState) => 
+export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch({
     type: CART_REMOVE_ITEM,
     payload: id
-  }); 
+  })
 
-  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));   
+  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+} 
 
 //get the shipping address from the form in ShippingScreen.js
 export const saveShippingAddress = (data) => (dispatch) => {
