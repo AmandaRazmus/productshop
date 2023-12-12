@@ -1,5 +1,5 @@
 {
-  "name": "ProductShop",
+  "name": "productshop",
   "version": "20.0.0",
   "description": "MERN shopping cart app",
   "main": "server.js",
@@ -32,6 +32,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.6.6",
     "nodemon": "^3.0.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "punycode": "^2.3.1"
   }
 }
