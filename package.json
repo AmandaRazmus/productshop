@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/AmandaRazmus/ProductShop.git"
+    "url": "git+ssh://git@github.com/AmandaRazmus/productshop.git"
   },
   "author": "Amanda Razmus",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AmandaRazmus/ProductShop/issues"
+    "url": "https://github.com/AmandaRazmus/productshop/issues"
   },
-  "homepage": "https://github.com/AmandaRazmus/ProductShop#readme",
+  "homepage": "https://github.com/AmandaRazmus/productshop#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "concurrently": "^8.0.1",
